@@ -2,6 +2,7 @@ from scipy.misc import imread
 import numpy as np
 import random
 
+# FUNKCJA ZLICZAJ¥CA B£ÊDY
 def countErrors(toCompare):
     result = []
 
