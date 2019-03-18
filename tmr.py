@@ -23,18 +23,31 @@ def countErrors(toCompare):
             result.append(0)
 
     # counting errors
-    counter = 0
-    for x in range(0, len(bits)):
-        if (toCompare[x] != result[x]):
-            counter += 1
+    counter = 0     # zlicza prawidlowy przesyl w obrebie kazdych 8 bitow
+    counter_2 = 0   # zlicza prawidlowo przeslane piksele (ciag 8 bitow)
+    counter_3 = 0   # zlicza prawidlowo przeslane bity
 
-    return (counter / len(bits))
+    for x in range(0, len(bits)):
+        if (toCompare[x] == result[x]):
+            counter += 1
+            counter_3 +=1
+        if ((x+1)%8 == 0 and counter == 8):
+            counter_2 += 1
+        if ((x+1)%8 == 0):
+            counter = 0
+            
+    print ("Procent prawidlowo przeslanych bitow: %.2f%%" %(counter_3/len(bits)*100))
+
+    return (counter_2 / (len(bits)/8))*100
 
 # MAIN
 
 img = imread("zdjecie.png", True, 'L')
 
 bits = []
+
+print ("Podaj prawdopodobienstwo bledu: ")
+answer = int(input())
 
 for x in range(0, len(img)):
     for y in range(0,len(img[x])):
@@ -51,7 +64,7 @@ endFile = open('wynik.txt', 'w')
 for x in range(0, len(bits)):
     for y in range(0, 3):
         r = random.randint(0, 100)
-        if (r > 75):
+        if (r < answer):
             if (bits[x] == 1):
                 endFile.write('0')
             else:
@@ -61,4 +74,4 @@ for x in range(0, len(bits)):
 
 endFile.close()
 
-print(countErrors(bits))
+print("Procent prawidlowo przeslanych pikseli (ciag 8 bitow): %.2f%%" %countErrors(bits))
