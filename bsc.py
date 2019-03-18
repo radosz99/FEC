@@ -2,7 +2,6 @@ from scipy.misc import imread
 import numpy as np
 import random
 
-# FUNKCJA ZLICZAJ¥CA B£ÊDY
 def countErrors(toCompare):
     result = []
 
@@ -27,7 +26,7 @@ bits = []
 
 for x in range(0, len(img)):
     for y in range(0,len(img[x])):
-        element = str(bin(int(img[x][y])))[2:]
+        element = str(bin(int(img[x][y])))[2:].zfill(8)
         for z in range(0, len(element)):
             bits.append(int(element[z]))
 
