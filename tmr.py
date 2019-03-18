@@ -13,7 +13,7 @@ def countErrors(toCompare):             #funkcja zwracajaca procent poprawnie pr
             break
 
         countOne = 0
-        for x in range(0, 3):			#dekodowanie potrójnej redundancji modularnej
+        for x in range(0, 3):           #dekodowanie potrójnej redundancji modularnej
             if (threeBits[x] == '1'):
                 countOne += 1           #zliczamy wystepowanie jedynek w podciagu trzyznakowym 
                                         #jesli wystapily 2 lub 3 jedynki to przeslana jest jedynka
@@ -53,16 +53,16 @@ for x in range(0, len(img)):
     for y in range(0,len(img[x])):
         element = str(bin(int(img[x][y])))[2:].zfill(8)	#konwertowanie danych do 8bitowej liczby w systemie dwójkowym
         for z in range(0, len(element)):                #ucinajac prefix 0b i z uzupelnieniem np. 10111 -> 00010111
-            bits.append(int(element[z]))				#zapis do tablicy kazdego bitu
+            bits.append(int(element[z]))                #zapis do tablicy kazdego bitu
 
-startFile = open('start.txt', 'w')		                #zapis do pliku ciągu bitów źródłowych
+startFile = open('start.txt', 'w')                      #zapis do pliku ciągu bitów źródłowych
 for x in range(0, len(bits)):
     startFile.write(str(bits[x]))
 
 random.seed(30)							#potrójna redundancja modularna i zapis do pliku bitów z prawdopodobienstwem błędu
 endFile = open('wynik.txt', 'w')
 for x in range(0, len(bits)):
-    for y in range(0, 3):				#pętla odpowiadająca za potrajanie każdego bitu
+    for y in range(0, 3):               #pętla odpowiadająca za potrajanie każdego bitu
         r = random.randint(0, 100)
         if (r < fault_prob):            #jesli wylosowane pseudo-losowo r jest mniejsze od 
             if (bits[x] == 1):          #prawdopodobienstwa bledu to wystepuje blad
