@@ -5,7 +5,7 @@ import random
 def countErrors(toCompare):	#funkcja sprawdzająca stosunek błędów 
     result = []
 
-    testFile = open('wynik.txt', 'r')	#sczytywanie z pliku tekstowego bitow odcieni pikseli
+    testFile = open('wynik.txt', 'r')	#odczyt z pliku tekstowego bitow odcieni pikseli
     while True:
         threeBits = testFile.read(3)
 

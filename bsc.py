@@ -5,7 +5,7 @@ import random
 def countErrors(toCompare):	#funkcja sprawdzająca stosunek błędów 
     result = []
 
-    testFile = open('wynik.txt', 'r')	#sczytywanie z pliku tekstowego bitow odcieni pikseli
+    testFile = open('wynik.txt', 'r')	#odczyt z pliku tekstowego bitow odcieni pikseli
     while True:
         bit = testFile.read(1)
         if not bit:
@@ -20,7 +20,7 @@ def countErrors(toCompare):	#funkcja sprawdzająca stosunek błędów
 
     return (counter / len(bits))		#zwrócenie stosunku ilości błędów do ilości wszystkich bitów
 
-img = imread("zdjecie.png", True, 'L')	#sczytanie obrazu 
+img = imread("zdjecie.png", True, 'L')	#odczyt obrazu 
 
 bits = []
 
