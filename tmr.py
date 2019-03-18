@@ -36,22 +36,22 @@ def countErrors(toCompare):	#funkcja sprawdzająca stosunek błędów
         if ((x+1)%8 == 0):
             counter = 0
             
-    print ("Procent prawidlowo przeslanych bitow: %.2f%%" %(counter_3/len(bits)*100))
-
-    return (counter_2 / (len(bits)/8))*100
+    a = counter_3 / len (bits) * 100
+    b = counter_2 / (len(bits) / 8) * 100
+    return a, b
 
 # MAIN
 
-img = imread("zdjecie.png", True, 'L')
+img = imread("zdjecie.png", True, 'L')      #wczytanie zdjecia do img
 
-bits = []
+bits = []   
 
 print ("Podaj prawdopodobienstwo bledu (0-100): ")
-answer = int(input())
+fault_prob = int(input())
 
 for x in range(0, len(img)):
     for y in range(0,len(img[x])):
-        element = str(bin(int(img[x][y])))[2:].zfill(8)	#konwertowanie danych do 8bitowej liczby w systemie dwójkowym
+        element = str(bin(int(img[x][y])))[2:].zfill(8)	#konwertowanie danych do 8bitowej liczby w systemie dwójkowym, ucinajac prexix 0b i z uwaga 10111 -> 00010111
         for z in range(0, len(element)):
             bits.append(int(element[z]))				#zapis do tablicy
 
@@ -64,7 +64,7 @@ endFile = open('wynik.txt', 'w')
 for x in range(0, len(bits)):
     for y in range(0, 3):				#pętla odpowiadająca za potrajanie każdego bitu
         r = random.randint(0, 100)
-        if (r < answer):
+        if (r < fault_prob):
             if (bits[x] == 1):
                 endFile.write('0')
             else:
@@ -74,4 +74,7 @@ for x in range(0, len(bits)):
 
 endFile.close()
 
-print("Procent prawidlowo przeslanych pikseli (ciag 8 bitow): %.3f%%" %countErrors(bits))
+result_bytes, result_pixels = countErrors(bits)
+
+print("Procent prawidlowo przeslanych pikseli (ciag 8 bajtow): %.3f%%" %result_pixels)
+print("Procent prawidlowo przeslanych bajtów: %.3f%%" %result_bytes)
