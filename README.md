@@ -19,3 +19,4 @@ w planach zaimplementowanie modelu Gilberta, kodu Hamminga, przeplotu i innych w
 
 ## Biblioteki
 * NumPy
+* SciPy
