@@ -10,7 +10,7 @@ Opis problemu - https://www.computerworld.pl/news/Korekcja-bledow-w-sieciach-WAN
 * model kanału komunikacyjnego BSC (Binary Symetric Channel) - bsc.sy
 * kod TMR (Triple Modular Redundancy) - tmr.sy
 
-w planach zaimplementowanie modelu Gilberta, kodu Hamminga, przeplotu i innych wybranych kodów
+w planach zaimplementowanie modelu Gilberta, kodu Hamminga, przeplotu i innych wybranych kodów.
 
 # Technologie
 
