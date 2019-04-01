@@ -20,6 +20,7 @@ def main():
 
     print("Procent prawidlowo przeslanych pikseli (ciag 8 bajtow): %.3f%%" %incorrect_byte_rate)
     print("Procent prawidlowo przeslanych bitów: %.3f%%" %incorrect_bits_rate)
-
+    xbytes = bsc.bitsToBytes(result2)
+    bsc.bytesToImg(xbytes, 'wynik.png')
 
 main()

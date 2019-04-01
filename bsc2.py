@@ -4,7 +4,7 @@ import bsc_functions as bsc
 # glowna funkcja programu
 def main():
     print ("Podaj prawdopodobienstwo bledu (0-100): ")
-    fault_prob = int(input())
+    fault_prob = float(input())
 
     img = imread("zdjecie.png", True, 'L')  # odczyt obrazu 
     bits = bsc.imageToBitArray(img)         # konwersja na tablicę bitów
