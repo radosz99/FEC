@@ -10,12 +10,12 @@ def main():
     img = imread("zdjecie.png", True, 'L')  # odczyt obrazu 
     bits = bsc.imageToBitArray(img)         # konwersja na tablicę bitów
 
-    result = bsc.hamminging(bits)
-    bits_errors = bsc.generateErrors(result, fault_prob, 30)
+    result = bsc.hamminging(bits)           #generowanie kodu hamminga
+    bits_errors = bsc.generateErrors(result, fault_prob, 30)    #zapis błędów
 
-    result2 = bsc.rehamminging(bits_errors)
+    result2 = bsc.rehamminging(bits_errors) #odczytywanie kodu z wykrywaniem błędów i usuwaniem bitów parzystości
 
-    # print(len(result))
+    #wyliczanie statystyk:
     incorrect_bits_rate, incorrect_byte_rate = bsc.countErrors(bits, result2)
 
     print("Procent prawidlowo przeslanych pikseli (ciag 8 bajtow): %.3f%%" %incorrect_byte_rate)
