@@ -1,6 +1,33 @@
 from scipy.misc import imread
+from matplotlib import pyplot as plt, cm
 import numpy as np
 import random
+
+def bytesToImg(bytes_array, file_name):
+    new_array = np.ndarray(shape=(400, 148, 3), dtype=int)
+
+    i = 0
+
+    for x in range(0, 400):
+        for y in range(0, 148):
+            for z in range(0, 3):
+                new_array[x][y][z] = bytes_array[i]
+            i += 1
+
+    plt.imsave(file_name, new_array)
+
+def bitsToBytes(bit_array):
+    result = []
+    # tmp_array = 
+
+    for x in range(0, len(bit_array), 8):
+        byte = ""
+        for y in range(0, 8):
+            byte += str(bit_array[x + y])
+
+        result.append(int(byte, 2))
+
+    return result
 
 # funkcja sprawdzająca stosunek błędów 
 def countErrors(bit_array1, bit_array2):             
