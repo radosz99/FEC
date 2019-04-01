@@ -16,6 +16,66 @@ def bytesToImg(bytes_array, file_name):
 
     plt.imsave(file_name, new_array)
 
+def hamminging(bit_array):
+    result = []
+
+    G = np.array([
+        [1, 1, 1, 0, 0, 0, 0, 1],
+        [1, 0, 0, 1, 1, 0, 0, 1],
+        [0, 1, 0, 1, 0, 1, 0, 1],
+        [1, 1, 0, 1, 0, 0, 1, 0]
+    ])
+
+    for x in range(0, len(bit_array), 4):
+        four_bits = np.array([[0, 0, 0, 0]])
+        for y in range(0, 4):
+            four_bits[0][y] = bit_array[x + y]
+
+        data_vector = np.dot(four_bits, G) % 2 
+        for y in range(0, 8):
+            result.append(data_vector[0][y])
+
+    return result
+
+def rehamminging(bit_array):
+    result = []
+
+    R = np.array([
+        [0, 0, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 1, 0, 0, 0],
+        [0, 0, 0, 0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0, 1, 0]
+    ])
+    for x in range(0, len(bit_array), 8):
+        eigth_bits = rehammingEightBits(bit_array[x : x + 8])
+        output_data = np.dot(R, eigth_bits.T)
+        
+        for y in range(0, 4):
+            result.append(int(output_data[y]))
+
+    return result
+
+
+def rehammingEightBits(bits):
+    H = np.array([
+        [1, 0, 1, 0, 1, 0, 1, 0],
+        [0, 1, 1, 0, 0, 1, 1, 0],
+        [0, 0, 0, 1, 1, 1, 1, 0],
+        [1, 1, 1, 1, 1, 1, 1, 1]
+    ])
+
+
+
+    eight_bits = np.array([[0, 0, 0, 0, 0, 0, 0, 0]])
+
+    for x in range(0, 8):
+        eight_bits[0][x] = bits[x]
+
+    syndrome = np.dot(H, eight_bits.T) % 2
+
+    return eight_bits
+
+
 def bitsToBytes(bit_array):
     result = []
     # tmp_array = 
