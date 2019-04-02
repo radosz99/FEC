@@ -33,7 +33,7 @@ def decodeTMR(bit_array):
 # glowna funkcja programu
 def main():
     print ("Podaj prawdopodobienstwo bledu (0-100): ")
-    fault_prob = int(input())
+    fault_prob = float(input())
 
     img = imread("zdjecie.png", True, 'L')  # odczyt obrazu 
     bits = bsc.imageToBitArray(img)         # obraz na tablicę bitów
@@ -46,8 +46,10 @@ def main():
     start_bits = bsc.readFromFile('start.txt')                      # odczyt prawidłowych bitów z pliku
     decoded_bits = decodeTMR(bsc.readFromFile('wynik.txt'))         # odczyt i dekodowanie potrojonych bitów z błędami
 
-    incorrect_bits_rate, incorrect_bytes_rate = bsc.countErrors(start_bits, decoded_bits)
-    print("Procent prawidlowo przeslanych pikseli (ciag 8 bajtow): %.3f%%" %incorrect_bytes_rate)
-    print("Procent prawidlowo przeslanych bitów: %.3f%%" %incorrect_bits_rate)
 
+    incorrect_bits_rate, incorrect_bytes_rate = bsc.countErrors(start_bits, decoded_bits)
+    print("Procent prawidlowo przeslanych pikseli (ciag 8 bitów): %.3f%%" %incorrect_bytes_rate)
+    print("Procent prawidlowo przeslanych bitów: %.3f%%" %incorrect_bits_rate)
+    xbytes = bsc.bitsToBytes(decoded_bits)
+    bsc.bytesToImg(xbytes, 'wynik.png')
 main()

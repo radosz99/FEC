@@ -15,7 +15,7 @@ def main():
 
     # porównanie bitów bez błędów i tych z błędami
     incorrect_bits_rate, incorrect_byte_rate = bsc.countErrors(bsc.readFromFile('start.txt'), bsc.readFromFile('wynik.txt'))
-    print("Procent prawidlowo przeslanych pikseli (ciag 8 bajtow): %.3f%%" %incorrect_byte_rate)
+    print("Procent prawidlowo przeslanych pikseli (ciag 8 bitów): %.3f%%" %incorrect_byte_rate)
     print("Procent prawidlowo przeslanych bitów: %.3f%%" %incorrect_bits_rate)
 
     xbytes = bsc.bitsToBytes(bits_errors)

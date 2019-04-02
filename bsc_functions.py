@@ -72,6 +72,14 @@ def rehammingEightBits(bits):
         eight_bits[0][x] = bits[x]
 
     syndrome = np.dot(H, eight_bits.T) % 2
+    # err=0
+    # for x in range(0, 4):
+    #     err+=2**(3-x)*int(syndrome[x][0])
+
+    # # print(syndrome, "aaaa", err)
+
+    # if(0<err and err<8):
+    #     eight_bits[0][err]=int(not eight_bits[0][err])
 
     return eight_bits
 
@@ -148,9 +156,9 @@ def generateErrors(bit_array, fault_prob, seed):
     random.seed(seed)
 
     for x in range(0, len(bit_array)):
-        r = random.randint(0, 100)
-        if (r <= fault_prob):
-            bit_error_array.append(int(not bit_array[x]))   # jeśli r < prawdopodobieństwo - zapisz negację bitu
+        r = random.randint(0, 1000000)
+        if (r/10000 <= fault_prob):
+            bit_error_array.append(int(not bit_array[x]))   # jeśli r <= prawdopodobieństwo - zapisz negację bitu
         else:
             bit_error_array.append(bit_array[x])            # w przeciwnym wypadku zapisz prawidłowy bit
 
