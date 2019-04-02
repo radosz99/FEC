@@ -3,6 +3,7 @@ from matplotlib import pyplot as plt, cm
 import numpy as np
 import random
 
+#konwertowanie bajtów obrazu do RGB i zapis do pliku wynikowego
 def bytesToImg(bytes_array, file_name):
     new_array = np.ndarray(shape=(400, 148, 3), dtype=int)
 
@@ -16,10 +17,11 @@ def bytesToImg(bytes_array, file_name):
 
     plt.imsave(file_name, new_array)
 
+#generowanie kodu hamminga
 def hamminging(bit_array):
     result = []
 
-    G = np.array([
+    G = np.array([                  #Maciesz generująca
         [1, 1, 1, 0, 0, 0, 0, 1],
         [1, 0, 0, 1, 1, 0, 0, 1],
         [0, 1, 0, 1, 0, 1, 0, 1],
@@ -28,15 +30,15 @@ def hamminging(bit_array):
 
     for x in range(0, len(bit_array), 4):
         four_bits = np.array([[0, 0, 0, 0]])
-        for y in range(0, 4):
+        for y in range(0, 4):                       #konwertowanie tablicy do 'NumPy array'
             four_bits[0][y] = bit_array[x + y]
 
-        data_vector = np.dot(four_bits, G) % 2 
+        data_vector = np.dot(four_bits, G) % 2      #mnożenie przez macierz generującą kod hamminga
         for y in range(0, 8):
-            result.append(data_vector[0][y])
-
+            result.append(data_vector[0][y])        #konwersja do tablicy bitów
     return result
 
+#dekodowanie kodu hamminga
 def rehamminging(bit_array):
     result = []
 
@@ -47,17 +49,17 @@ def rehamminging(bit_array):
         [0, 0, 0, 0, 0, 0, 1, 0]
     ])
     for x in range(0, len(bit_array), 8):
-        eigth_bits = rehammingEightBits(bit_array[x : x + 8])
-        output_data = np.dot(R, eigth_bits.T)
+        eigth_bits = rehammingEightBits(bit_array[x : x + 8])      #odczytywanie każdego bajtu koloru
+        output_data = np.dot(R, eigth_bits.T)                      #dekodowanie bitów parzystości
         
         for y in range(0, 4):
-            result.append(int(output_data[y]))
+            result.append(int(output_data[y]))                      #konwersja do tablicy bitów
 
     return result
 
-
+#funkcja konwertująca 8 elementów tablicy bitów w 'NumPy array'
 def rehammingEightBits(bits):
-    H = np.array([
+    H = np.array([                          #macierz parzystości
         [1, 0, 1, 0, 1, 0, 1, 0],
         [0, 1, 1, 0, 0, 1, 1, 0],
         [0, 0, 0, 1, 1, 1, 1, 0],
@@ -83,10 +85,9 @@ def rehammingEightBits(bits):
 
     return eight_bits
 
-
+#funkcja konwertująca kolejne 8 bitów koloru na decymalną liczbę 
 def bitsToBytes(bit_array):
     result = []
-    # tmp_array = 
 
     for x in range(0, len(bit_array), 8):
         byte = ""
