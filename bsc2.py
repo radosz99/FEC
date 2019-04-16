@@ -1,12 +1,13 @@
 from scipy.misc import imread
 import bsc_functions as bsc
+import numpy as np
+import cv2
 
-# glowna funkcja programu
 def main():
     print ("Podaj prawdopodobienstwo bledu (0-100): ")
     fault_prob = float(input())
 
-    img = imread("zdjecie.png", True, 'L')  # odczyt obrazu 
+    img = cv2.imread("zdjecie.png", 0)
     bits = bsc.imageToBitArray(img)         # konwersja na tablicę bitów
     bsc.saveToFile(bits, 'start.txt')       # zapis do pliku
 
@@ -15,7 +16,7 @@ def main():
 
     # porównanie bitów bez błędów i tych z błędami
     incorrect_bits_rate, incorrect_byte_rate = bsc.countErrors(bsc.readFromFile('start.txt'), bsc.readFromFile('wynik.txt'))
-    print("Procent prawidlowo przeslanych pikseli (ciag 8 bajtow): %.3f%%" %incorrect_byte_rate)
+    print("Procent prawidlowo przeslanych pikseli (ciag 8 bitów): %.3f%%" %incorrect_byte_rate)
     print("Procent prawidlowo przeslanych bitów: %.3f%%" %incorrect_bits_rate)
 
     xbytes = bsc.bitsToBytes(bits_errors)
