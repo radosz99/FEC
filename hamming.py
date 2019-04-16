@@ -18,8 +18,8 @@ def main():
     #wyliczanie statystyk:
     incorrect_bits_rate, incorrect_byte_rate = bsc.countErrors(bits, result2)
 
-    print("Procent prawidlowo przeslanych pikseli (ciag 8 bitów): %.3f%%" %incorrect_byte_rate)
-    print("Procent prawidlowo przeslanych bitów: %.3f%%" %incorrect_bits_rate)
+    print("Procent prawidlowo przeslanych pikseli (ciag 8 bitów): %.5f%%" %incorrect_byte_rate)
+    print("Procent prawidlowo przeslanych bitów: %.5f%%" %incorrect_bits_rate)
     xbytes = bsc.bitsToBytes(result2)
     bsc.bytesToImg(xbytes, 'wynik.png')
 

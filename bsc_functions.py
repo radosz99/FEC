@@ -158,8 +158,8 @@ def generateErrors(bit_array, fault_prob, seed):
 
     for x in range(0, len(bit_array)):
  
-        r = random.randint(1, 1000000)
-        if (r/10000 <= fault_prob):
+        r = random.randint(1, 1000000000)
+        if (r/10000000 <= fault_prob):
             bit_error_array.append(int(not bit_array[x]))   # jeśli r <= prawdopodobieństwo - zapisz negację bitu
         else:
             bit_error_array.append(bit_array[x])            # w przeciwnym wypadku zapisz prawidłowy bit
