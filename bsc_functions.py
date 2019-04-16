@@ -74,15 +74,14 @@ def rehammingEightBits(bits):
         eight_bits[0][x] = bits[x]
 
     syndrome = np.dot(H, eight_bits.T) % 2
-    # err=0
-    # for x in range(0, 4):
-    #     err+=2**(3-x)*int(syndrome[x][0])
+    if(syndrome[3][0] == 1):
+        err=0
+        for x in range(0, 3):
+            err+=(2**(x))*int(syndrome[x][0])
 
-    # # print(syndrome, "aaaa", err)
-
-    # if(0<err and err<8):
-    #     eight_bits[0][err]=int(not eight_bits[0][err])
-
+        err -= 1
+        eight_bits[0][err] = int(not (eight_bits[0][err]))
+   
     return eight_bits
 
 #funkcja konwertująca kolejne 8 bitów koloru na decymalną liczbę 
