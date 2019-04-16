@@ -165,3 +165,23 @@ def generateErrors(bit_array, fault_prob, seed):
             bit_error_array.append(bit_array[x])            # w przeciwnym wypadku zapisz prawidłowy bit
 
     return bit_error_array
+
+
+def imageToBitArrayTrestle(bits):
+    bit_array = []
+    
+    for x in range (0, 8):
+        for y in range (x, len(bits),8):
+            bit_array.append(bits[y])
+            
+    return bit_array
+    
+def decodeTrestle(bits):
+    bit_array = []
+    tmp = int(len(bits)/8)
+
+    for x in range (0, tmp):
+        for y in range(0,len(bits),tmp):
+            bit_array.append(bits[x + y])
+            
+    return bit_array
