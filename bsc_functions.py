@@ -166,7 +166,7 @@ def generateErrors(bit_array, fault_prob, seed):
 
     return bit_error_array
 
-
+#funckja tworząca przeplot dla podanej tablicy bitów
 def imageToBitArrayTrestle(bits):
     bit_array = []
     
@@ -175,7 +175,8 @@ def imageToBitArrayTrestle(bits):
             bit_array.append(bits[y])
             
     return bit_array
-    
+
+#funkcja dekodująca przeplot dla danej tablicy bitów
 def decodeTrestle(bits):
     bit_array = []
     tmp = int(len(bits)/8)

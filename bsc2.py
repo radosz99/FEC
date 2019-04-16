@@ -12,7 +12,7 @@ def main():
     img = cv2.imread("zdjecie.png", 0)
 
     bits = bsc.imageToBitArray(img)               # konwersja na tablicę bitów
-
+    #tworzenie przeplotu dla zczytanegho ciągu bitów, jeżeli wybrano metode z przeplotem
     if (operation_check == 2):
         bits = bsc.imageToBitArrayTrestle(bits)
 
@@ -28,6 +28,7 @@ def main():
     print("Procent prawidlowo przeslanych bitów: %.3f%%" %incorrect_bits_rate)
 
     # xbytes = bsc.bitsToBytes(bits_errors)
+    #odkodowywanie przeplotu(w celu odtworzenia obrazu), jeżeli został wcześniej wykonany
     if (operation_check == 2):
         bits_errors = bsc.decodeTrestle(bits_errors)
     xbytes = bsc.bitsToBytes(bits_errors)
