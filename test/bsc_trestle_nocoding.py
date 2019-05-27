@@ -17,7 +17,7 @@ img = cv2.imread("../zdjecie.png", 0)
 
 for x in range(0, 10):
     bits = bsc.imageToBitArray(img)
-    bits_trestled = bsc.imageToBitArrayTrestle(bits)
+    bits_trestled = bsc.bitArrayTrestle(bits)
     bits_errors = bsc.generateErrors(bits_trestled, fault_prob)
     bits_detrestled = bsc.decodeTrestle(bits_errors)
     incorrect_bits_rate, incorrect_byte_rate = bsc.countErrors(bits, bits_detrestled)

@@ -21,7 +21,7 @@ def bytesToImg(bytes_array, file_name):
 def hamminging(bit_array):
     result = []
 
-    G = np.array([                  #Maciesz generująca
+    G = np.array([                  #Macierz generująca
         [1, 1, 1, 0, 0, 0, 0, 1],
         [1, 0, 0, 1, 1, 0, 0, 1],
         [0, 1, 0, 1, 0, 1, 0, 1],
@@ -166,7 +166,7 @@ def generateErrors(bit_array, fault_prob):
     return bit_error_array
 
 #funckja tworząca przeplot dla podanej tablicy bitów
-def imageToBitArrayTrestle(bits):
+def bitArrayTrestle(bits):
     bit_array = []
     
     for x in range (0, 8):
