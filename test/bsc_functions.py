@@ -151,15 +151,14 @@ def readFromFile(file_name):
     return result
 
 # funkcja generująca błędy w podanej tablicy z podanym prawdopodobieństwem
-def generateErrors(bit_array, fault_prob, seed):
+def generateErrors(bit_array, fault_prob):
     bit_error_array = []
-    random.seed(seed)
 
 
     for x in range(0, len(bit_array)):
  
-        r = random.randint(1, 1000000000)
-        if (r/10000000 <= fault_prob):
+        r = random.random() * 100
+        if (r <= fault_prob):
             bit_error_array.append(int(not bit_array[x]))   # jeśli r <= prawdopodobieństwo - zapisz negację bitu
         else:
             bit_error_array.append(bit_array[x])            # w przeciwnym wypadku zapisz prawidłowy bit
