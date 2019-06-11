@@ -3,35 +3,7 @@ import bsc_functions as bsc
 import numpy as np
 import random
 import cv2
-
-#generowanie błędów modelem gilberta - zapisywanie w zależności od stanow
-def gilbert_model(bit_array):
-    correct_prob = 9
-    injure_prob = 10 - correct_prob
-    
-    state = 1 # 1 = correct, 0 = error
-
-    bit_error_array = []
-
-    for x in range(0, len(bit_array)):
-        #losowanie czy następuje zmiana stanu
-        r = random.random()
-        if (state == 1):
-            if (r*100 <= injure_prob):
-                state = 0
-        else:
-            if (r*100 <= correct_prob):
-                state = 1
-        #zapisywanie w zależności od aktualnego stanu
-        if (state == 0):
-            bit_error_array.append(int(not bit_array[x]))   # jeśli r <= prawdopodobieństwo - zapisz negację bitu
-        else:
-            bit_error_array.append(bit_array[x])    
-
-    return bit_error_array
-
-
-
+import gilbert
 
 def main():
     random.seed(30)
@@ -42,7 +14,7 @@ def main():
     for x in range(0, 10):
         bits = bsc.imageToBitArray(img)         # konwersja na tablicę bitów
         bits_trestled = bsc.bitArrayTrestle(bits)
-        bits_errors = gilbert_model(bits_trestled)  # generowanie błędów
+        bits_errors = gilbert.gilbert_model(bits_trestled)  # generowanie błędów
         bits_detrestled = bsc.decodeTrestle(bits_errors)
         incorrect_bits_rate, incorrect_byte_rate = bsc.countErrors(bits, bits_detrestled)
         sum_bits += incorrect_bits_rate

@@ -6,8 +6,8 @@ import cv2
 
 #generowanie błędów modelem gilberta - zapisywanie w zależności od stanow
 def gilbert_model(bit_array):
-    correct_prob = 1
-    injure_prob = 1
+    p_dz = 0.9
+    p_zd = 0.25
     
     state = 1 # 1 = correct, 0 = error
 
@@ -18,14 +18,17 @@ def gilbert_model(bit_array):
         #losowanie czy następuje zmiana stanu
         r = random.random()
         if (state == 1):
-            if (r*100 <= injure_prob):
+            if (r <= 1 - p_dz):
                 state = 0
         else:
-            if (r*100 <= correct_prob):
+            if (r*100 <= 1 - p_zd):
                 state = 1
         #zapisywanie w zależności od aktualnego stanu
         if (state == 0):
-            bit_error_array.append(int(not bit_array[x]))   # jeśli r <= prawdopodobieństwo - zapisz negację bitu
+            if (r <= 0.1):
+                bit_error_array.append(int(not bit_array[x]))
+            else:
+                bit_error_array.append(bit_array[x])
         else:
             bit_error_array.append(bit_array[x])    
 

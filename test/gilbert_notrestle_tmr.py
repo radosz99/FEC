@@ -1,31 +1,7 @@
 from scipy.misc import imread
 import bsc_functions as bsc
 import random
-
-def gilbert_model(bit_array):
-    correct_prob = 9.9
-    injure_prob = 10 - correct_prob
-    
-    state = 1 # 1 = correct, 0 = error
-
-    bit_error_array = []
-
-    for x in range(0, len(bit_array)):
-        #losowanie czy następuje zmiana stanu
-        r = random.random()
-        if (state == 1):
-            if (r*100 <= injure_prob):
-                state = 0
-        else:
-            if (r*100 <= correct_prob):
-                state = 1
-        #zapisywanie w zależności od aktualnego stanu
-        if (state == 0):
-            bit_error_array.append(int(not bit_array[x]))   # jeśli r <= prawdopodobieństwo - zapisz negację bitu
-        else:
-            bit_error_array.append(bit_array[x])    
-
-    return bit_error_array
+import gilbert
 
 # potrójna redundancja modularna - funkcja potrajająca każdy bit
 def codeTMR(bit_array):
@@ -67,7 +43,7 @@ def main():
     for x in range(0, 10):
         bits = bsc.imageToBitArray(img)         # obraz na tablicę bitów
         bits_TMR = codeTMR(bits)                                        # kodowanie TMR
-        bits_TMR_errors = gilbert_model(bits_TMR)
+        bits_TMR_errors = gilbert.gilbert_model(bits_TMR)
         decoded_bits = decodeTMR(bits_TMR_errors)         # odczyt i dekodowanie potrojonych bitów z błędami
         incorrect_bits_rate, incorrect_bytes_rate = bsc.countErrors(bits, decoded_bits)
         sum_bits += incorrect_bits_rate
